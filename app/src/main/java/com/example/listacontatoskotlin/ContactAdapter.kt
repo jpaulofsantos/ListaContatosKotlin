@@ -40,6 +40,14 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ContactAdapterViewHol
         holder.bind(list[position])
     }
 
+    //13 criando metodo para popular a lista
+    fun updateList(list: List<Contact>) {
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged() //informa que a lista foi alterada
+
+    }
+
     //ContactAdapterViewHolder será responsável por gerenciar cada item da lista
     //2 criar o viewholder, primeiro passando a View para ContactAdapterViewHolder e depois passando itemView no construtor do  RecyclerView.ViewHolder
     class ContactAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
