@@ -2,7 +2,12 @@ package com.example.listacontatoskotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Message
 import android.speech.RecognizerIntent
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,5 +54,31 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         )
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    //21 menu - primeiro criar a pasta res/menu caso não tenha. Criar o arquivo xml
+    //22 metodo para criar o menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_menu_1 -> {
+                showToast("Menu 1 - Teste")
+                true
+            }
+            R.id.item_menu_2 -> {
+                showToast("Menu 2 - Teste")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
