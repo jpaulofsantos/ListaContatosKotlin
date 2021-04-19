@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity(), ClickItemContactListener {
         findViewById<RecyclerView>(R.id.rv_list)
     }
     //17
-    private val adapter = ContactAdapter()
+    //32 passando a Inteface(ClickItemContactListener), no caso this, pois a classe já implementa a interface.
+    private val adapter = ContactAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +58,11 @@ class MainActivity : AppCompatActivity(), ClickItemContactListener {
                 Contact(
                     name = "Teste2",
                     phone = "(11) 90000-9999",
+                    picture = "img.jpg"
+                ),
+                Contact(
+                    name = "Teste3",
+                    phone = "(11) 80000-8888",
                     picture = "img.jpg"
                 )
             )
@@ -105,6 +111,8 @@ class MainActivity : AppCompatActivity(), ClickItemContactListener {
     override fun clickItemContact(contact: Contact) {
         //27 criando a intent, passando contexto e a classe
         val intent = Intent(this, ContactDetail::class.java)
+        //33 coloca o valor que estamos passando - chave/valor - chave criada na classe ContactDetail (companion object)
+        intent.putExtra("EXTRA_CONTACT", contact)
         startActivity(intent)
     }
 }

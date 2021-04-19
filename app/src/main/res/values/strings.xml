@@ -2,7 +2,7 @@
     <string name="app_name">Lista Contatos Kotlin</string>
     <string name="menu_1">Menu 1</string>
     <string name="menu_2">Menu 2</string>
-
+    <string name="toolbar_2">Contato Info</string>
     <string name="open_drawer">Abrir</string>
     <string name="close_drawer">Fechar</string>
 

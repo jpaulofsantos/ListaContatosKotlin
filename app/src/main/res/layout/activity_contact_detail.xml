@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ContactDetail">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_view_2"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="@string/toolbar_2"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="74dp"
@@ -13,13 +24,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:background="@color/teal_700"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_view_2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@android:drawable/ic_dialog_info"
+        tools:srcCompat="@android:drawable/ic_dialog_info" />
 
     <TextView
         android:id="@+id/textContact2"
@@ -29,6 +38,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="Nome do Contato"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +53,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:text="(00) 99999-9999"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textContact2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
