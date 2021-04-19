@@ -36,6 +36,7 @@
 
         <TextView
             android:id="@+id/textPhone"
+            style="@style/TextViewDefault"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="(00) 0000-0000"

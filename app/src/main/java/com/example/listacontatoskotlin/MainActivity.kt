@@ -1,5 +1,6 @@
 package com.example.listacontatoskotlin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
@@ -16,7 +17,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+//25 criar a classe ClickItemContactListener e extender na MainActivity
+class MainActivity : AppCompatActivity(), ClickItemContactListener {
 
     //16 obtendo o rv do xml
     private val rvList: RecyclerView by lazy {
@@ -99,6 +101,10 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toogle)
         toogle.syncState()
     }
-
-
+    //26 implementar o método
+    override fun clickItemContact(contact: Contact) {
+        //27 criando a intent, passando contexto e a classe
+        val intent = Intent(this, ContactDetail::class.java)
+        startActivity(intent)
+    }
 }
