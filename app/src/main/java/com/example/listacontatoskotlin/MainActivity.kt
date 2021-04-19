@@ -1,6 +1,8 @@
 package com.example.listacontatoskotlin
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
@@ -12,10 +14,13 @@ import android.view.View
 import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.content.edit
 import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 //25 criar a classe ClickItemContactListener e extender na MainActivity
 class MainActivity : AppCompatActivity(), ClickItemContactListener {
@@ -34,21 +39,15 @@ class MainActivity : AppCompatActivity(), ClickItemContactListener {
 
         //15
         initDrawer()
-        bindView()
-        updateList()
+        fetchContactList() //simulando o retorno de uma API
+        bindView() //obtem os dados que estão nas preferencias do usuário a partir do metodo getListContacts()
+
     }
 
-    //14
-    private fun bindView() {
-        //18 usando o adpter no rv
-        rvList.adapter = adapter
-        //19 definindo a forma do rv
-        rvList.layoutManager = LinearLayoutManager(this)
-    }
-
-    //20 criando uma lista fake
-    private fun updateList() {
-        adapter.updateList(
+    //Shared preferences
+    //34 salva o retorno da "API" no objeto de preferencias de usuario
+    private fun fetchContactList() {
+        val list =
             arrayListOf(
                 Contact(
                     name = "Teste1",
@@ -64,9 +63,77 @@ class MainActivity : AppCompatActivity(), ClickItemContactListener {
                     name = "Teste3",
                     phone = "(11) 80000-8888",
                     picture = "img.jpg"
+                ),
+                Contact(
+                    name = "Teste4",
+                    phone = "(11) 80000-8888",
+                    picture = "img.jpg"
+                ),
+                Contact(
+                    name = "Teste5",
+                    phone = "(11) 80000-8888",
+                    picture = "img.jpg"
+                ),
+                Contact(
+                    name = "Teste6",
+                    phone = "(11) 80000-8888",
+                    picture = "img.jpg"
+                ),
+                Contact(
+                    name = "Teste7",
+                    phone = "(11) 80000-8888",
+                    picture = "img.jpg"
+                ),
+                Contact(
+                    name = "Teste8",
+                    phone = "(11) 80000-8888",
+                    picture = "img.jpg"
+                ),
+                Contact(
+                    name = "Teste9",
+                    phone = "(11) 80000-8888",
+                    picture = "img.jpg"
+                ),
+                Contact(
+                    name = "Teste10",
+                    phone = "(11) 80000-8888",
+                    picture = "img.jpg"
                 )
             )
-        )
+        //36 o metodo edit retorno apply por default, aplicado o commit para garantir o retorno da lista
+        getInstanceSharedPreferences().edit {
+            //37 GSON converte um objeto para json
+            putString("contacts", Gson().toJson(list))
+            commit()
+        }
+    }
+
+    //35
+    private fun getInstanceSharedPreferences(): SharedPreferences {
+        return getSharedPreferences("com.example.listacontatoskotlin.PREFERENCES",Context.MODE_PRIVATE)
+    }
+
+    //14
+    private fun bindView() {
+        //18 usando o adpter no rv
+        rvList.adapter = adapter
+        //19 definindo a forma do rv
+        rvList.layoutManager = LinearLayoutManager(this)
+        //38
+        updateList()
+    }
+
+    //39 obetendo lista contatos - convertendo string para objeto de classe
+    private fun getListContacts(): List<Contact> {
+        val list = getInstanceSharedPreferences().getString("contacts", "[]") // chave e valor default (retorno vazio)
+        val turnsType = object : TypeToken<List<Contact>>() {}.type
+        return Gson().fromJson(list, turnsType)
+
+    }
+
+    //20 criando uma lista fake
+    private fun updateList() {
+        adapter.updateList(getListContacts())
     }
 
     private fun showToast(message: String) {
